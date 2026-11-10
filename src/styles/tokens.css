@@ -1,0 +1,33 @@
+/* Design tokens — derived from the VRM logo: deep navy + golden amber. */
+:root {
+  /* Brand */
+  --navy-900: #011f41;   /* logo navy */
+  --navy-800: #0a2d57;
+  --navy-700: #14407a;
+  --navy-100: #e4eaf3;
+  --navy-50:  #f3f6fa;
+  --gold-500: #d4952a;   /* logo amber */
+  --gold-600: #b87c17;
+  --gold-400: #e6b04f;
+  --gold-100: #fbf1dc;
+
+  /* Neutrals */
+  --ink: #0f1b2d;
+  --text: #34445c;
+  --muted: #6b7a90;
+  --line: #dbe2ec;
+  --surface: #ffffff;
+  --bg: #ffffff;
+
+  /* Type */
+  --font-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Shape & space */
+  --radius: 6px;
+  --radius-lg: 12px;
+  --shadow: 0 8px 30px rgba(1, 31, 65, 0.1);
+  --container: 1200px;
+  --gutter: clamp(1rem, 4vw, 2rem);
+  --section-y: clamp(3.5rem, 8vw, 6.5rem);
+}
