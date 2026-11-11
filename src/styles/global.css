@@ -428,3 +428,24 @@ a.topbar__item:hover strong, .topbar__item strong a:hover { text-decoration: und
 .section--machine .stage-machine { background: transparent; }
 .section--machine .stage-machine .vignette { background: radial-gradient(ellipse at 50% 48%, transparent 35%, rgba(1,31,65,.35) 70%, rgba(1,31,65,.9) 100%); }
 .section--machine + .section--blueprint { border-top: 4px solid var(--gold-500); }
+
+/* Recent projects: faint drafting grid behind the collage, and a thin edge on each photo so the
+   cards sit on something instead of floating */
+/* Faint photo on top of the grid. Drop your image at public/images/projects-bg.jpg (any size; it is
+   cropped to cover the section). Strength is the opacity on .section--blueprint::after. */
+.section--blueprint::after { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: url('/images/projects-bg.jpg') center / cover no-repeat; opacity: .08;
+  -webkit-mask-image: radial-gradient(ellipse 75% 85% at 50% 50%, #000 35%, transparent 100%);
+  mask-image: radial-gradient(ellipse 75% 85% at 50% 50%, #000 35%, transparent 100%); }
+.section--blueprint::before { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.055) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+  background-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 80% at 50% 50%, #000 40%, transparent 100%);
+  mask-image: radial-gradient(ellipse 70% 80% at 50% 50%, #000 40%, transparent 100%); }
+.pj__photo { border: 1px solid rgba(255,255,255,.18); box-shadow: 0 18px 40px rgba(0,0,0,.4); }
+.pj:hover .pj__photo { border-color: rgba(230,176,79,.6); }
+.pj__panel { border-color: rgba(230,176,79,.35); }
