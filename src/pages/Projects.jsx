@@ -9,7 +9,7 @@ export default function Projects() {
   const list = filter === 'All' ? projects : projects.filter((p) => p.type === filter)
   return (
     <>
-      <PageHeader title="Our Projects" intro="Residential apartments, homes, hospitality and industrial work across Nairobi and surrounding counties." />
+      <PageHeader scene="projects" title="Our Projects" intro="Residential apartments, homes, hospitality and industrial work across Nairobi and surrounding counties." />
       <section className="section">
         <div className="container">
           <div className="filters">

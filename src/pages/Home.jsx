@@ -1,22 +1,45 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { company, services, projects, stats, pillars, accreditations } from '../data/site.js'
-import { SectionHead, CTA, ProjectCard } from '../components/ui.jsx'
+import { heroSlides, company, services, projects, stats, stages, process, accreditations } from '../data/site.js'
+import { SectionHead, CTA, ProjectCard, Typewriter, ProcessTimeline, LogoMarquee } from '../components/ui.jsx'
+import ProjectShowcase from '../components/ProjectShowcase.jsx'
 import Icon from '../components/Icon.jsx'
 
 export default function Home() {
+  const [slide, setSlide] = useState(0)
+  const [hover, setHover] = useState(false)
+  const paused = hover
+  useEffect(() => {
+    if (paused || heroSlides.length < 2) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const t = setInterval(() => setSlide((i) => (i + 1) % heroSlides.length), 6000)
+    return () => clearInterval(t)
+  }, [paused])
+
   return (
     <>
-      <section className="hero">
-        <div className="hero__bg" style={{ backgroundImage: 'url(/images/p42.jpg)' }} />
-        <div className="container hero__inner">
-          <span className="eyebrow">Engineering · Architecture · Construction</span>
-          <h1>The future, <em>built smarter</em></h1>
-          <p>VRM Engineering Solutions Ltd delivers integrated design, engineering and construction services across Kenya — on time, to standard, and built to last.</p>
+      <section className="hero" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} onFocus={() => setHover(true)} onBlur={() => setHover(false)}>
+        {heroSlides.map((src, i) => (
+          <div key={src} className={`hero__bg${i === slide ? ' is-active' : ''}`} style={{ backgroundImage: `url(${src})` }} />
+        ))}
+        <div className="container hero__inner"><div className="hero__content">
+          <span className="eyebrow">The future. built smarter</span>
+          <h1><Typewriter parts={['Planned, designed ', { em: 'and built right.' }]} /></h1>
+          <p>Planning, approvals, design, engineering and construction handled by one licensed team, so nothing falls between consultants. Trusted by private and government clients for over a decade.</p>
           <div className="hero__actions">
-            <Link to="/projects" className="btn btn--gold">View Our Projects</Link>
-            <Link to="/contact" className="btn btn--ghost">Request a Quote</Link>
+            <Link to="/contact" className="btn btn--primary">Request a Free Quote</Link>
+            <Link to="/projects" className="btn btn--inverse">View Our Projects</Link>
           </div>
-        </div>
+        </div></div>
+        {heroSlides.length > 1 && (
+          <div className="hero__controls">
+            <div className="hero__dots">
+              {heroSlides.map((_, i) => (
+                <button key={i} type="button" aria-label={`Show slide ${i + 1}`} aria-current={i === slide} className={i === slide ? 'is-active' : ''} onClick={() => setSlide(i)} />
+              ))}
+            </div>
+          </div>
+        )}
       </section>
 
       <section className="stats">
@@ -27,54 +50,45 @@ export default function Home() {
 
       <section className="section">
         <div className="container">
-          <SectionHead eyebrow="What we do" title="One team, from design to delivery"
-            action={<Link to="/services" className="link-arrow">All services</Link>}>
-            Eleven disciplines under one roof — so design, engineering and construction stay aligned from the first sketch to handover.
+          <SectionHead eyebrow="What we do" title={<Typewriter parts={['Eleven disciplines. One accountable team…']} />}
+            action={<Link to="/services" className="link-arrow stages__all-top">View all {services.length} services</Link>}>
+            You deal with one point of contact, while our architects, engineers, planners and environmental specialists coordinate behind the scenes.
           </SectionHead>
-          <div className="grid grid--3">
-            {services.map((s) => (
-              <Link key={s.slug} to={`/services/${s.slug}`} className="card">
-                <div className="icon-box"><Icon name={s.icon} /></div>
-                <h3>{s.title}</h3>
-                <p>{s.summary}</p>
+          <div className="stages">
+            {stages.map((st) => (
+              <Link key={st.n} to={`/services#${st.id}`} className="stage">
+                <span className="stage__top"><span className="stage__icon"><Icon name={st.icon} /></span><span className="eyebrow">{st.n}</span></span>
+                <h3>{st.title}</h3>
+                <p>{st.gets}</p>
+                <p className="stage__list">{st.services.map((sl) => services.find((x) => x.slug === sl)?.title).filter(Boolean).join(' · ')}</p>
+                <span className="link-arrow">View services</span>
               </Link>
             ))}
           </div>
+          <p className="stages__all-bottom"><Link to="/services" className="link-arrow">View all {services.length} services</Link></p>
         </div>
       </section>
 
-      <section className="section section--tint">
+      <section className="section section--navy section--blueprint">
         <div className="container">
-          <SectionHead eyebrow="Selected work" title="Recent projects"
-            action={<Link to="/projects" className="link-arrow">All projects</Link>} />
-          <div className="grid grid--3">
-            {projects.slice(0, 6).map((p) => <ProjectCard key={p.slug} project={p} />)}
-          </div>
-        </div>
-      </section>
-
-      <section className="section section--navy">
-        <div className="container">
-          <SectionHead eyebrow="Why VRM" title="Our pillars of excellence" />
-          <div className="grid grid--3">
-            {pillars.map((p, i) => (
-              <div key={p} className="card" style={{ background: 'rgba(255,255,255,.04)', borderColor: 'rgba(255,255,255,.12)' }}>
-                <span className="eyebrow">0{i + 1}</span>
-                <h3>{p}</h3>
-              </div>
-            ))}
-          </div>
+          <SectionHead eyebrow="Recent projects" action={<Link to="/projects" className="link-arrow">See all projects</Link>} />
+          <ProjectShowcase projects={projects.slice(0, 4)} />
         </div>
       </section>
 
       <section className="section">
         <div className="container">
-          <SectionHead eyebrow="Trust" title="Registered and licensed">
-            {company.name}'s directors are registered with Kenya's leading regulatory and professional bodies.
+          <SectionHead eyebrow="Trust" title={<Typewriter parts={['Registered and licensed…']} />}>
+            {company.name} is led by visionary and hardworking directors who are duly registered and licensed to practice by relevant regulatory and professional institutions
           </SectionHead>
-          <div className="grid grid--4">
-            {accreditations.map((a) => <div className="badge" key={a.abbr}><strong>{a.abbr}</strong><span>{a.name}</span></div>)}
-          </div>
+          <LogoMarquee items={accreditations} />
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <SectionHead eyebrow="How we work" title={<Typewriter parts={['How your project runs with us…']} />} />
+          <ProcessTimeline steps={process} />
         </div>
       </section>
 

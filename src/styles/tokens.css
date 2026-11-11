@@ -7,14 +7,14 @@
   --navy-100: #e4eaf3;
   --navy-50:  #f3f6fa;
   --gold-500: #d4952a;   /* logo amber */
-  --gold-600: #b87c17;
+  --gold-600: #8a5a0b;   /* darkened for 4.5:1 text on white */
   --gold-400: #e6b04f;
   --gold-100: #fbf1dc;
 
   /* Neutrals */
   --ink: #0f1b2d;
   --text: #34445c;
-  --muted: #6b7a90;
+  --muted: #5a6a82;
   --line: #dbe2ec;
   --surface: #ffffff;
   --bg: #ffffff;
@@ -24,10 +24,37 @@
   --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   /* Shape & space */
-  --radius: 6px;
-  --radius-lg: 12px;
+  --radius: 4px;         /* one radius for buttons, inputs, cards */
+  --radius-lg: 4px;
   --shadow: 0 8px 30px rgba(1, 31, 65, 0.1);
   --container: 1200px;
+
+  /* Role tokens (brand-agnostic names; values come from the brand palette above) */
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-inverse: var(--navy-900);
+  --color-text: var(--text);
+  --color-text-muted: var(--muted);
+  --color-text-inverse: #c9d4e4;
+  --color-brand: var(--navy-900);
+  --color-action: var(--gold-500);
+  --color-action-hover: var(--gold-400);
+  --color-border: var(--line);
+  --color-focus: var(--navy-700);
+
+  /* Type sizes by content role: one size per role, used everywhere */
+  --text-lead: 1rem;        /* intro paragraphs: hero, section intros, page headers, CTA bands */
+  --text-body: 1rem;        /* card and running copy */
+  --text-small: .875rem;    /* captions, meta, lists of services, footer */
+  --text-eyebrow: .8rem;    /* labels above headings */
+
+  /* Spacing (8pt system) */
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 24px;
+  --space-6: 32px; --space-7: 48px; --space-8: 64px; --space-9: 96px; --space-10: 128px;
+
+  /* Motion */
+  --motion-fast: 150ms; --motion-base: 250ms; --motion-slow: 400ms;
+  --ease: cubic-bezier(0.2, 0, 0, 1);
   --gutter: clamp(1rem, 4vw, 2rem);
-  --section-y: clamp(3.5rem, 8vw, 6.5rem);
+  --section-y: clamp(4rem, 8vw, 6rem);
 }

@@ -8,7 +8,7 @@ export const company = {
   strapline: 'Design. Plan. Build. We Deliver.',
   contactPerson: 'Eng. Vincent Ooko',
   phones: ['+254 724 691 276', '+254 763 591 276'],
-  email: 'Info.vrmholdings254@gmail.com',
+  email: 'info.vrmholdings254@gmail.com',
   location: 'Nairobi, Kenya',
   incorporation: 'Incorporated under the Companies Act (Cap. 486) Laws of Kenya',
   vision:
@@ -61,14 +61,16 @@ export const pillars = [
   'Innovation & Technology',
 ]
 
+// To show a real logo, drop the image in /public/images/accreditations/ and add  logo: '/images/accreditations/ebk.jpeg'
+// to the entry (see EBK below). Entries without a logo show their initials as a placeholder tile.
 export const accreditations = [
-  { abbr: 'EBK', name: 'Engineering Board of Kenya' },
-  { abbr: 'IEK', name: 'Institution of Engineers of Kenya' },
-  { abbr: 'PPRB', name: 'Physical Planners Registration Board' },
-  { abbr: 'NEMA', name: 'National Environment Management Authority' },
-  { abbr: 'EIK', name: 'Environmental Institute of Kenya' },
-  { abbr: 'KIP', name: 'Kenya Institute of Planners' },
-  { abbr: 'ICPMK', name: 'Institute of Construction Project Managers of Kenya' },
+  { logo: '/images/accreditations/ebk.jpeg' },
+  { logo: '/images/accreditations/iek.jpg' },
+  { logo: '/images/accreditations/pprb.jpeg' },
+  { logo: '/images/accreditations/nema.avif' },
+  { logo: '/images/accreditations/eik.jpeg' },
+  { logo: '/images/accreditations/kip.jpeg' },
+  { logo: '/images/accreditations/icpmk.png' },
 ]
 
 export const stats = [
@@ -195,3 +197,39 @@ export const sitemap = [
   { heading: 'More Services', links: services.slice(6).map((s) => ({ label: s.title, to: `/services/${s.slug}` })) },
   { heading: 'Work', links: [{ label: 'All Projects', to: '/projects' }, { label: 'Request a Quote', to: '/contact' }, { label: 'Contact', to: '/contact' }] },
 ]
+
+// Hero slideshow — add or remove image paths here (files live in /public/images).
+export const heroSlides = [
+  '/images/p42.jpg',
+  '/images/p45.jpg',
+  '/images/p50.jpg',
+  '/images/p58.jpg',
+]
+
+// The eleven services grouped by stage of a project's life. `services` are slugs from the list above.
+export const stages = [
+  { id: 'plan-approve', n: '01', title: 'Plan & Approve', icon: 'clipboard',
+    gets: 'A site that is assessed and approved before any money is spent on building.',
+    services: ['environmental-impact-assessments', 'geotechnical-engineering'] },
+  { id: 'design', n: '02', title: 'Design', icon: 'plan',
+    gets: 'Coordinated drawings and engineering, ready to build and ready for approval.',
+    services: ['architectural-design', 'civil-structural-engineering', 'electrical-mechanical-engineering', 'interior-design', 'roads-traffic-engineering'] },
+  { id: 'build', n: '03', title: 'Build', icon: 'hardhat',
+    gets: 'A finished building delivered to the agreed scope by the team that designed it.',
+    services: ['construction-services'] },
+  { id: 'manage', n: '04', title: 'Manage', icon: 'shield',
+    gets: 'Independent supervision, testing and safety control so cost and quality stay on track.',
+    services: ['construction-project-management', 'health-safety-environment', 'non-destructive-testing'] },
+]
+
+// The client's journey with us — edit to match your real process.
+export const process = [
+  { icon: 'chat', title: 'Enquiry', text: 'You tell us what you want to build and where.' },
+  { icon: 'pin', title: 'Site visit', text: 'We visit the site, listen and agree scope.' },
+  { icon: 'document', title: 'Quotation', text: 'You receive a clear, itemised quotation.' },
+  { icon: 'pen', title: 'Contract', text: 'We agree timeline and terms in writing, then start.' },
+  { icon: 'key', title: 'Handover', text: 'Final inspection, documents and aftercare.' },
+]
+
+
+

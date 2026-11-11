@@ -1,21 +1,21 @@
 import { company, values, pillars, accreditations } from '../data/site.js'
-import { PageHeader, SectionHead, CTA } from '../components/ui.jsx'
+import { PageHeader, SectionHead, CTA, Typewriter } from '../components/ui.jsx'
 
 export default function About() {
   return (
     <>
-      <PageHeader title="Who We Are" crumbs={[{ label: 'About', to: '/about' }]}
+      <PageHeader scene="about" title="Who We Are" crumbs={[{ label: 'About', to: '/about' }]}
         intro="A Kenyan engineering and construction consultancy with over a decade of experience serving private and government clients, locally and internationally." />
 
-      <section className="section">
-        <div className="container split">
-          <div>
+      <section className="story">
+        <div className="story__bg" style={{ backgroundImage: 'url(/images/p43.jpg)' }} role="img" aria-label="A VRM project" />
+        <div className="container story__inner">
+          <div className="story__content">
             <span className="eyebrow">Our story</span>
-            <h2>Quality, timely, standards-driven</h2>
+            <h2><Typewriter parts={['Quality, timely, standards-driven…']} /></h2>
             <p>{company.name} is incorporated under the Companies Act (Cap. 486) Laws of Kenya. A team of highly qualified and innovative professionals delivers services that meet client specifications while adhering to both local and international standards.</p>
             <p>Our directors are duly registered and licensed to practise by the relevant regulatory and professional institutions. We aim to provide globally competitive services in the most effective, efficient and economical way — leveraging advanced and current technologies.</p>
           </div>
-          <img src="/images/p43.jpg" alt="VRM project" style={{ borderRadius: 12 }} />
         </div>
       </section>
 
