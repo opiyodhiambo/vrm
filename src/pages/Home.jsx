@@ -1,9 +1,28 @@
-import { useEffect, useState } from 'react'
+import { Suspense, lazy, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { heroSlides, company, services, projects, stats, stages, process, accreditations } from '../data/site.js'
 import { SectionHead, CTA, ProjectCard, Typewriter, ProcessTimeline, LogoMarquee } from '../components/ui.jsx'
 import ProjectShowcase from '../components/ProjectShowcase.jsx'
-import Icon from '../components/Icon.jsx'
+
+const StageMachine = lazy(() => import('../components/StageMachine.jsx'))
+
+// Mounts the 3D machine (and downloads three.js) only once the section is near the viewport.
+function MachineOnView() {
+  const ref = useRef(null)
+  const [show, setShow] = useState(false)
+  useEffect(() => {
+    const el = ref.current
+    if (!el || !('IntersectionObserver' in window)) { setShow(true); return }
+    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setShow(true); io.disconnect() } }, { rootMargin: '400px 0px' })
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
+  return (
+    <div ref={ref} className="machine">
+      {show && <Suspense fallback={<div className="machine__fallback">Assembling the machine…</div>}><StageMachine height="100%" /></Suspense>}
+    </div>
+  )
+}
 
 export default function Home() {
   const [slide, setSlide] = useState(0)
@@ -54,18 +73,14 @@ export default function Home() {
             action={<Link to="/services" className="link-arrow stages__all-top">View all {services.length} services</Link>}>
             You deal with one point of contact, while our architects, engineers, planners and environmental specialists coordinate behind the scenes.
           </SectionHead>
-          <div className="stages">
-            {stages.map((st) => (
-              <Link key={st.n} to={`/services#${st.id}`} className="stage">
-                <span className="stage__top"><span className="stage__icon"><Icon name={st.icon} /></span><span className="eyebrow">{st.n}</span></span>
-                <h3>{st.title}</h3>
-                <p>{st.gets}</p>
-                <p className="stage__list">{st.services.map((sl) => services.find((x) => x.slug === sl)?.title).filter(Boolean).join(' · ')}</p>
-                <span className="link-arrow">View services</span>
-              </Link>
-            ))}
-          </div>
           <p className="stages__all-bottom"><Link to="/services" className="link-arrow">View all {services.length} services</Link></p>
+          <div className="machine-wrap">
+            {/* <div className="machine-wrap__head">
+              <span className="eyebrow">See it run</span>
+              <p>One brief, four stages, one team. Drag to rotate, hover a station, or press <strong>One project</strong> to follow a brief from survey to handover.</p>
+            </div> */}
+            <MachineOnView />
+          </div>
         </div>
       </section>
 

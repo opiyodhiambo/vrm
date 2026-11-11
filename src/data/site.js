@@ -200,10 +200,12 @@ export const sitemap = [
 
 // Hero slideshow — add or remove image paths here (files live in /public/images).
 export const heroSlides = [
-  '/images/p42.jpg',
-  '/images/p45.jpg',
-  '/images/p50.jpg',
-  '/images/p58.jpg',
+  '/images/hero1.jpeg',
+  '/images/hero2.jpeg',
+  '/images/hero3.jpeg',
+  // '/images/p45.jpg',
+  // '/images/p50.jpg',
+  // '/images/p58.jpg',
 ]
 
 // The eleven services grouped by stage of a project's life. `services` are slugs from the list above.
