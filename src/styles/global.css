@@ -416,7 +416,15 @@ a.topbar__item:hover strong, .topbar__item strong a:hover { text-decoration: und
 .machine-wrap__head { display: flex; align-items: baseline; gap: var(--space-5); margin-bottom: var(--space-4); flex-wrap: wrap; }
 .machine-wrap__head .eyebrow { margin: 0; }
 .machine-wrap__head p { margin: 0; font-size: var(--text-small); color: var(--color-text-muted); max-width: 62ch; }
-.machine { height: 700px; background: var(--navy-900); border: 1px solid var(--line); }
+.machine { height: 700px; background: var(--navy-900); }
 .machine__fallback { height: 100%; display: grid; place-items: center; color: #8fa0b8; font-size: var(--text-small); }
 @media (max-width: 900px) { .machine { height: 560px; } }
 @media (max-width: 560px) { .machine { height: 500px; } }
+
+/* "What we do" sits on navy so the 3D machine reads as part of the page */
+.section--machine { padding-bottom: 0; }
+.section--machine .lead { color: #c9d4e4; }
+.section--machine .machine-wrap { margin-top: var(--space-6); }
+.section--machine .stage-machine { background: transparent; }
+.section--machine .stage-machine .vignette { background: radial-gradient(ellipse at 50% 48%, transparent 35%, rgba(1,31,65,.35) 70%, rgba(1,31,65,.9) 100%); }
+.section--machine + .section--blueprint { border-top: 4px solid var(--gold-500); }

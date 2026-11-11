@@ -67,7 +67,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section section--navy section--machine">
         <div className="container">
           <SectionHead eyebrow="What we do" title={<Typewriter parts={['Eleven disciplines. One accountable team…']} />}
             action={<Link to="/services" className="link-arrow stages__all-top">View all {services.length} services</Link>}>
