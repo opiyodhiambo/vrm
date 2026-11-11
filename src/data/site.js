@@ -8,7 +8,7 @@ export const company = {
   strapline: 'Design. Plan. Build. We Deliver.',
   contactPerson: 'Eng. Vincent Ooko',
   phones: ['+254 724 691 276', '+254 763 591 276'],
-  email: 'info.vrmholdings254@gmail.com',
+  email: 'info@vrmengineeringsolutions.co.ke',
   location: 'Nairobi, Kenya',
   incorporation: 'Incorporated under the Companies Act (Cap. 486) Laws of Kenya',
   vision:
@@ -203,9 +203,9 @@ export const heroSlides = [
   '/images/hero1.jpeg',
   '/images/hero2.jpeg',
   '/images/hero3.jpeg',
-  // '/images/p45.jpg',
-  // '/images/p50.jpg',
-  // '/images/p58.jpg',
+  '/images/hero4.jpeg',
+  '/images/hero5.jpeg',
+  '/images/hero6.jpeg',
 ]
 
 // The eleven services grouped by stage of a project's life. `services` are slugs from the list above.
