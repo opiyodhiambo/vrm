@@ -235,3 +235,25 @@ export const process = [
 
 
 
+
+// Organisational chart (from the company profile). Teams sit under their department head.
+export const orgChart = {
+  governance: [
+    { id: 'board', title: 'Board' },
+    { id: 'ed', title: 'Executive Director' },
+  ],
+  executive: [
+    { id: 'audit', title: 'Internal Audit' },
+    { id: 'gm', title: 'General Manager' },
+    { id: 'legal', title: 'Legal Advisor' },
+  ],
+  departments: [
+    { id: 'eng', title: 'Engineering Manager', teams: ['Civil / Structural Engineers', 'Mechanical Engineers', 'Electrical Engineers'] },
+    { id: 'proj', title: 'Projects & Construction Manager', teams: ['Assistant Project Manager', 'Assistant Construction Manager'] },
+    { id: 'plan', title: 'Planning & Environmental Manager', teams: ['Assistant Planners & Surveyors', 'Environmentalists & Social-economists', 'GIS Experts'] },
+    { id: 'fin', title: 'Finance Manager', teams: ['Procurement', 'Accountant'] },
+    { id: 'hr', title: 'Human Resource & Administration Manager', teams: ['General Support Staff & Customer Service'] },
+    { id: 'ict', title: 'ICT Manager', teams: [] },
+    { id: 'bd', title: 'Business Development Manager', teams: ['Marketers & Business Development'] },
+  ],
+}
