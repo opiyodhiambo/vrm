@@ -108,7 +108,7 @@ export default function Home() {
       </section>
 
       {projects.length > 0 && (
-      <section className="section section--navy section--blueprint work">
+      <section className="section work">
           <div className="container">
             <div className="work__head">
               <span className="eyebrow">Recent projects</span>

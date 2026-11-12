@@ -63,7 +63,8 @@ function readCache() {
 
 export function ContentProvider({ children }) {
   const fallback = useMemo(staticContent, [])
-  const cached = sanityConfigured ? readCache() : null
+  const saved = sanityConfigured ? readCache() : null
+  const cached = saved && (saved.services?.length || saved.projects?.length) ? saved : null
   const [state, setState] = useState(cached ? { ...cached, source: 'cache' } : { ...fallback, source: 'static' })
   const [ready, setReady] = useState(!sanityConfigured || !!cached)
 
@@ -78,12 +79,15 @@ export function ContentProvider({ children }) {
         // The CMS answered, so it is the source of truth, even if a list is empty (a clean slate).
         // The built-in content is only used when the CMS cannot be reached at all.
         setState({ ...next, source: 'sanity' })
-        try { localStorage.setItem(CACHE_KEY, JSON.stringify(next)) } catch { /* private mode */ }
+        // never save an empty result: a stale empty copy would show a blank site on the next visit
+        if (next.services.length || next.projects.length) { try { localStorage.setItem(CACHE_KEY, JSON.stringify(next)) } catch { /* private mode */ } }
       })
       .catch((err) => {
         // Keep what we have, but say why. A 403 / CORS error here means this site's address is not in
         // sanity.io/manage > API > CORS origins.
         console.warn('[content] Could not load from Sanity, showing built-in content instead:', err?.message || err)
+        // a saved copy that is empty is no use when the CMS cannot be reached: fall back to the built-in content
+        setState((cur) => (!cur.services.length && !cur.projects.length ? { ...fallback, source: 'static' } : cur))
       })
       .finally(() => { clearTimeout(timer); alive && setReady(true) })
     return () => { alive = false; clearTimeout(timer) }

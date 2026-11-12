@@ -6,7 +6,7 @@ export const company = {
   strapline: 'Design. Plan. Build. We Deliver.',
   contactPerson: 'Eng. Vincent Ooko',
   phones: ['+254 724 691 276', '+254 763 591 276'],
-  email: 'info.vrmholdings254@gmail.com',
+  email: 'info@vrmengineeringsolutions.co.ke',
   location: 'Nairobi, Kenya',
   incorporation: 'Incorporated under the Companies Act (Cap. 486) Laws of Kenya',
   vision:
