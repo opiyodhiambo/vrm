@@ -107,9 +107,10 @@ function Header() {
 }
 
 function WhatsAppFloat() {
+  const { pathname } = useLocation()
   const href = `https://wa.me/254763591276?text=${encodeURIComponent('Hello VRM Engineering Solutions, I would like to make an enquiry.')}`
   return (
-    <a className="wa-float" href={href} target="_blank" rel="noreferrer" aria-label="Chat with us on WhatsApp" title="Chat on WhatsApp">
+    <a className={`wa-float${pathname === '/services' ? ' wa-float--lift' : ''}`} href={href} target="_blank" rel="noreferrer" aria-label="Chat with us on WhatsApp" title="Chat on WhatsApp">
       <Icon name="whatsapp" />
     </a>
   )

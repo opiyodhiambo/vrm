@@ -1097,3 +1097,13 @@ a.topbar__item:hover strong, .topbar__item strong a:hover { text-decoration: und
 /* Shown for a moment on a first visit while the CMS content loads */
 .content-splash { position: fixed; inset: 0; display: grid; place-items: center; background: var(--navy-900); color: var(--gold-400); z-index: 500; }
 .content-splash span { font-family: var(--font-mono); letter-spacing: .3em; text-transform: uppercase; font-size: var(--text-small); }
+
+/* Phones: the wheel above already shows the service name and summary, so the sheet drops its own title
+   (and the small icon row) and starts straight at "What's included". Desktop keeps the full sheet. */
+@media (max-width: 900px) {
+  .swheel__sheet h3 { display: none; }
+  .swheel__sheet-top { margin-bottom: var(--space-2); }
+}
+
+/* Services on phones: the sheet fills the bottom-right and the page already offers Call and Request this service, so hide the floating WhatsApp button there */
+@media (max-width: 900px) { .wa-float--lift { display: none; } }
