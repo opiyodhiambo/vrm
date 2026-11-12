@@ -3,9 +3,9 @@ import { createPortal } from 'react-dom'
 import { Link } from 'react-router-dom'
 import Icon from './Icon.jsx'
 
-export function PageHeader({ title, intro, crumbs = [], scene }) {
+export function PageHeader({ title, intro, crumbs = [], scene, compact = false }) {
   return (
-    <section className={`page-header${scene ? ' page-header--scene' : ''}`} style={scene ? { '--scene': `url(/images/bg-scene-${scene}.svg)` } : undefined}>
+    <section className={`page-header${scene ? ' page-header--scene' : ''}${compact ? ' page-header--compact' : ''}`} style={scene ? { '--scene': `url(/images/bg-scene-${scene}.svg)` } : undefined}>
       <div className="container">
         <div className="crumbs">
           <Link to="/">Home</Link>
@@ -73,9 +73,18 @@ export function Typewriter({ parts, speed = 55 }) {
     if (reduce) { setCount(total); return }
     const el = ref.current
     if (!el || !('IntersectionObserver' in window)) { setStarted(true); return }
-    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setStarted(true); io.disconnect() } }, { threshold: 0.6 })
+    // Start only once the heading has stayed in view for a moment: a reload's scroll jump or a layout
+    // shift can flash a lower section into view for a frame, and that should not trigger the typing.
+    let timer = 0
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) {
+        timer = window.setTimeout(() => { setStarted(true); io.disconnect() }, 250)
+      } else {
+        clearTimeout(timer)
+      }
+    }, { threshold: 0.6 })
     io.observe(el)
-    return () => io.disconnect()
+    return () => { clearTimeout(timer); io.disconnect() }
   }, [reduce, total])
 
   useEffect(() => {

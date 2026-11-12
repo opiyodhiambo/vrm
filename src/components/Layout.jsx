@@ -105,6 +105,15 @@ function Header() {
   )
 }
 
+function WhatsAppFloat() {
+  const href = `https://wa.me/254763591276?text=${encodeURIComponent('Hello VRM Engineering Solutions, I would like to make an enquiry.')}`
+  return (
+    <a className="wa-float" href={href} target="_blank" rel="noreferrer" aria-label="Chat with us on WhatsApp" title="Chat on WhatsApp">
+      <Icon name="whatsapp" />
+    </a>
+  )
+}
+
 function MobileActionBar() {
   const phone = company.phones[0].replace(/\s/g, '')
   return (
@@ -142,6 +151,9 @@ function Footer() {
 
 export default function Layout() {
   const { pathname, hash } = useLocation()
+  // We handle scroll position ourselves; the browser's own restore on reload would briefly show lower
+  // sections and set off their typing headings before we scroll back to the top.
+  useEffect(() => { if ('scrollRestoration' in history) history.scrollRestoration = 'manual' }, [])
   useEffect(() => {
     if (!hash) { window.scrollTo(0, 0); return }
     const el = document.getElementById(decodeURIComponent(hash.slice(1)))
@@ -156,6 +168,7 @@ export default function Layout() {
         <div id="cta-slot" />
         <Footer />
       </div>
+      <WhatsAppFloat />
       <MobileActionBar />
     </>
   )

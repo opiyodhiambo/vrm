@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { projects } from '../data/site.js'
-import { PageHeader, CTA, ProjectCard } from '../components/ui.jsx'
+import { Link } from 'react-router-dom'
+import { PageHeader, CTA } from '../components/ui.jsx'
 
 const types = ['All', ...new Set(projects.map((p) => p.type))]
 
@@ -12,10 +13,26 @@ export default function Projects() {
       <PageHeader scene="projects" title="Our Projects" intro="Residential apartments, homes, hospitality and industrial work across Nairobi and surrounding counties." />
       <section className="section">
         <div className="container">
-          <div className="filters">
-            {types.map((t) => <button key={t} className={t === filter ? 'on' : ''} onClick={() => setFilter(t)}>{t}</button>)}
+          <div className="legend" role="tablist" aria-label="Filter projects">
+            <span className="legend__label">Filter</span>
+            {types.map((t) => <button key={t} type="button" role="tab" aria-selected={t === filter} className={t === filter ? 'on' : ''} onClick={() => setFilter(t)}>{t}</button>)}
+            <span className="legend__count">{list.length} {list.length === 1 ? 'project' : 'projects'}</span>
           </div>
-          <div className="grid grid--3">{list.map((p) => <ProjectCard key={p.slug} project={p} />)}</div>
+          <div className="lattice lattice--3">
+            {list.map((p, n) => (
+              <Link key={p.slug} to={`/projects/${p.slug}`} className="lattice__cell prj">
+                <i className="mark" aria-hidden="true" />
+                <div className="prj__img"><img src={p.images[0]} alt={`${p.name}, ${p.location}`} loading="lazy" /></div>
+                <div className="prj__meta"><span className="idx">{String(n + 1).padStart(2, '0')}</span><span className="prj__type">{p.type}</span>{p.year && <span className="prj__year">{p.year}</span>}</div>
+                <h3>{p.name}</h3>
+                <p>{p.location}</p>
+              </Link>
+            ))}
+            {Array.from({ length: (3 - (list.length % 3)) % 3 }).map((_, i) => (
+              <div key={`fill-${i}`} className="lattice__cell lattice__cell--void" aria-hidden="true"><i className="mark" /></div>
+            ))}
+            <i className="mark mark--tr" aria-hidden="true" /><i className="mark mark--bl" aria-hidden="true" /><i className="mark mark--br" aria-hidden="true" />
+          </div>
         </div>
       </section>
       <CTA />

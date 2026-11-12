@@ -21,11 +21,12 @@
 
   /* Type */
   --font-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
   --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   /* Shape & space */
-  --radius: 4px;         /* one radius for buttons, inputs, cards */
-  --radius-lg: 4px;
+  --radius: 0;           /* drafting grid: square corners everywhere */
+  --radius-lg: 0;
   --shadow: 0 8px 30px rgba(1, 31, 65, 0.1);
   --container: 1200px;
 

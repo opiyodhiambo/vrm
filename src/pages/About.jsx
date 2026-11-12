@@ -5,21 +5,12 @@ import Icon from '../components/Icon.jsx'
 export default function About() {
   return (
     <>
-      <PageHeader scene="about" title="Who We Are" crumbs={[{ label: 'About', to: '/about' }]}
-        intro="A Kenyan engineering and construction consultancy with over a decade of experience serving private and government clients, locally and internationally." />
-
-      <section className="story">
-        <div className="story__bg" style={{ backgroundImage: 'url(/images/our-story-bg.jpeg)' }} role="img" aria-label="A VRM project" />
-        <div className="container story__inner">
-          <div className="story__content">
-            <span className="eyebrow">Our story</span>
-            <h2><Typewriter parts={['Quality, timely, standards-driven…']} /></h2>
-            <p>{company.name} is incorporated under the Companies Act (Cap. 486) Laws of Kenya. A team of highly qualified and innovative professionals delivers services that meet client specifications while adhering to both local and international standards.</p>
-            <p>Our directors are duly registered and licensed to practise by the relevant regulatory and professional institutions. We aim to provide globally competitive services in the most effective, efficient and economical way — leveraging advanced and current technologies.</p>
-          </div>
-        </div>
-      </section>
-
+      <PageHeader 
+        scene="about" 
+        title="Trusted. Experienced. Committed." 
+        crumbs={[{ label: 'About', to: '/about' }]}
+        intro="Incorporated under the Companies Act (Cap. 486) Laws of Kenya, VRM Engineering Solutions brings over a decade of experience serving private and government clients locally and internationally." 
+      />
       <section className="section direction">
         <div className="container">
           <SectionHead eyebrow="Direction" title={<Typewriter parts={['What drives us…']} />} />
@@ -67,8 +58,8 @@ export default function About() {
               <span className="values__icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M5 21V4M5 4h11l-2 4 2 4H5" /></svg>
               </span>
-              <span className="eyebrow">Core values</span>
-              <h2>How we work</h2>
+              <span className="eyebrow">How we work </span>
+              <h2>Core values</h2>
             </div>
             {values.map((v, i) => (
               <div className="values__cell" key={v.title}>
@@ -98,7 +89,9 @@ export default function About() {
 
       <section className="section">
         <div className="container">
-          <SectionHead eyebrow="Accreditation" title="Regulatory registrations" />
+          <SectionHead eyebrow="Licensed professionals" title={<Typewriter parts={['Professionals you can rely on...']} />}>
+            {company.name} is led by experienced directors and registered practitioners certified by leading industry boards so you can feel completely secure trusting us with your investment.
+          </SectionHead>
           <LogoMarquee items={accreditations} />
         </div>
       </section>
