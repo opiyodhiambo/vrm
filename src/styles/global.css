@@ -1088,3 +1088,7 @@ a.topbar__item:hover strong, .topbar__item strong a:hover { text-decoration: und
 .pd .gal__thumbs button.on { width: 112px; opacity: 1; outline: 1px solid var(--gold-500); outline-offset: 0; }
 .pd .gal__thumbs button:hover { opacity: 1; }
 @media (max-width: 900px) { .pd__split { grid-template-columns: 1fr; } .pd__media { position: static; } }
+
+/* Shown for a moment on a first visit while the CMS content loads */
+.content-splash { position: fixed; inset: 0; display: grid; place-items: center; background: var(--navy-900); color: var(--gold-400); z-index: 500; }
+.content-splash span { font-family: var(--font-mono); letter-spacing: .3em; text-transform: uppercase; font-size: var(--text-small); }

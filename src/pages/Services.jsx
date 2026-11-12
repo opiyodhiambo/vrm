@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { services, stages } from '../data/site.js'
+import { useContent } from '../lib/content.jsx'
 import { PageHeader, CTA } from '../components/ui.jsx'
 import Icon from '../components/Icon.jsx'
 
@@ -9,6 +9,7 @@ const ACTIVE_H = 172    // approximate height of the active row (title + one sen
 const HEADER = 76       // sticky site header height
 
 export default function Services() {
+  const { services, stages } = useContent()
   // Services in stage order; the first of each stage carries the anchor the home page links to.
   const list = stages.flatMap((st) =>
     st.services
@@ -48,7 +49,8 @@ export default function Services() {
     if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') { e.preventDefault(); goTo(active - 1) }
   }
 
-  const cur = list[active].s
+  if (!n) return <><PageHeader scene="services" title="Integrated Consultancy, Design & Construction Services" intro="Our services will be listed here shortly." /><CTA /></>
+  const cur = list[Math.min(active, n - 1)].s
   return (
     <>
       <PageHeader

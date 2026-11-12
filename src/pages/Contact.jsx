@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
-import { company, services } from '../data/site.js'
+import { company } from '../data/site.js'
+import { useContent } from '../lib/content.jsx'
 
 export default function Contact() {
+  const { services } = useContent()
   const [sent, setSent] = useState(false)
   const [params] = useSearchParams()
   const preselected = services.find((x) => x.slug === params.get('service'))

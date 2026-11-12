@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
-import { company, nav, sitemap } from '../data/site.js'
+import { company, nav } from '../data/site.js'
+import { useContent } from '../lib/content.jsx'
 import Icon from './Icon.jsx'
 
 function TopBar() {
@@ -125,6 +126,7 @@ function MobileActionBar() {
 }
 
 function Footer() {
+  const { sitemap } = useContent()
   return (
     <footer className="footer">
       <div className="container footer__top">

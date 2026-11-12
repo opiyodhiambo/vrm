@@ -1,0 +1,30 @@
+{
+  "name": "vrm-engineering-studio",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "main": "package.json",
+  "scripts": {
+    "dev": "sanity dev",
+    "start": "sanity start",
+    "build": "sanity build",
+    "deploy:external": "sanity deploy --external --url https://cms.vrmengineering.co.ke",
+    "import": "node --env-file=.env scripts/import.mjs",
+    "clear": "node --env-file=.env scripts/clear.mjs"
+  },
+  "dependencies": {
+    "@sanity/vision": "^6.23.0",
+    "react": "^19.2.2",
+    "react-dom": "^19.2.2",
+    "sanity": "^6.23.0",
+    "styled-components": "^6.1.15"
+  },
+  "devDependencies": {
+    "@sanity/client": "^8.15.1",
+    "@types/node": "^26.6.6",
+    "typescript": "^5.6.3"
+  },
+  "engines": {
+    "node": ">=22.12"
+  }
+}

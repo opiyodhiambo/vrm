@@ -360,11 +360,22 @@ export const projects = [
   { slug: 'ketraco-storage-systems', name: 'Modern Storage Systems', client: 'KETRACO', type: 'Industrial', location: 'Apex Storage Facilities, Mombasa Road, Nairobi', value: 'KES 25M', year: 2025, description: 'Supply, fabrication and installation of modern storage systems.', images: [img(73), img(74)] },
 ]
 
-// PLACEHOLDER: until each project has its full photo set, repeat its own images so the gallery
-// carousel and thumbnail strip can be seen working. Delete this block once real photos are added.
+// PLACEHOLDER: until each project has its own full photo set, fill every gallery to six images with
+// photos borrowed from the other projects (shuffled, no repeats within a project). The shuffle is seeded
+// by the project slug so it is random-looking but identical on every load. Delete this block, and add
+// real photos to each project's `images`, when the genuine galleries are ready.
+const POOL = [...new Set(projects.flatMap((p) => p.images))]
+function seeded(str) {
+  let h = 1779033703 ^ str.length
+  for (let i = 0; i < str.length; i++) { h = Math.imul(h ^ str.charCodeAt(i), 3432918353); h = (h << 13) | (h >>> 19) }
+  return () => { h = Math.imul(h ^ (h >>> 16), 2246822507); h = Math.imul(h ^ (h >>> 13), 3266489909); return ((h ^= h >>> 16) >>> 0) / 4294967296 }
+}
 for (const p of projects) {
-  const base = [...p.images]
-  while (p.images.length < 6) p.images.push(base[p.images.length % base.length])
+  p.ownImages = [...p.images] // the genuine photos, before padding (used by the Sanity import script)
+  const rnd = seeded(p.slug)
+  const others = POOL.filter((src) => !p.images.includes(src))
+  for (let i = others.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [others[i], others[j]] = [others[j], others[i]] }
+  p.images.push(...others.slice(0, Math.max(0, 6 - p.images.length)))
 }
 
 export const sitemap = [

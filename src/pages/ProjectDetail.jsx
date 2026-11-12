@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom'
-import { projects } from '../data/site.js'
+import { useContent } from '../lib/content.jsx'
 import { PageHeader, CTA } from '../components/ui.jsx'
 import Gallery from '../components/Gallery.jsx'
 import NotFound from './NotFound.jsx'
@@ -12,6 +12,7 @@ import NotFound from './NotFound.jsx'
 const TBC = <span className="pd__tbc">To be confirmed</span>
 
 export default function ProjectDetail() {
+  const { projects } = useContent()
   const { slug } = useParams()
   const p = projects.find((x) => x.slug === slug)
   if (!p) return <NotFound />

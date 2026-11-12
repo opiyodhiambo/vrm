@@ -1,9 +1,10 @@
 import { Link, useParams } from 'react-router-dom'
-import { services, projects } from '../data/site.js'
+import { useContent } from '../lib/content.jsx'
 import { PageHeader, CTA, ProjectCard } from '../components/ui.jsx'
 import NotFound from './NotFound.jsx'
 
 export default function ServiceDetail() {
+  const { services, projects } = useContent()
   const { slug } = useParams()
   const s = services.find((x) => x.slug === slug)
   if (!s) return <NotFound />

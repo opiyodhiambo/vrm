@@ -1,6 +1,7 @@
 import { Suspense, lazy, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { heroSlides, company, services, projects, stats, stages, process, accreditations } from '../data/site.js'
+import { heroSlides, company, stats, process, accreditations } from '../data/site.js'
+import { useContent } from '../lib/content.jsx'
 import { SectionHead, CTA, Typewriter, LogoMarquee } from '../components/ui.jsx'
 import { ContainerScroll, CardSticky } from '../components/CardStack.jsx'
 import Icon from '../components/Icon.jsx'
@@ -26,6 +27,7 @@ function MachineOnView() {
 }
 
 export default function Home() {
+  const { services, projects, stages } = useContent()
   const [slide, setSlide] = useState(0)
   const [hover, setHover] = useState(false)
   const paused = hover
@@ -105,29 +107,31 @@ export default function Home() {
         </div>
       </section>
 
+      {projects.length > 0 && (
       <section className="section section--navy section--blueprint work">
-        <div className="container">
-          <div className="work__head">
-            <span className="eyebrow">Recent projects</span>
-            {/* <h2><Typewriter parts={['Take a look around our recent builds...']} /></h2> */}
-            <p>Take a look around our recent builds...</p>
-            <Link to="/projects" className="link-arrow">See all projects</Link>
+          <div className="container">
+            <div className="work__head">
+              <span className="eyebrow">Recent projects</span>
+              {/* <h2><Typewriter parts={['Take a look around our recent builds...']} /></h2> */}
+              <p>Take a look around our recent builds...</p>
+              <Link to="/projects" className="link-arrow">See all projects</Link>
+            </div>
+            <ContainerScroll className="work__cards">
+              {projects.slice(0, 4).map((p, i) => (
+                <CardSticky key={p.slug} index={i} incrementY={64} incrementZ={5} className="work-card">
+                  <Link to={`/projects/${p.slug}`} className="work-card__head">
+                    <h3>{p.name}</h3>
+                    <div className="work-card__chips">
+                      {[p.type, p.location, p.year, p.description].filter(Boolean).map((c) => <span key={c}>{c}</span>)}
+                    </div>
+                  </Link>
+                  <img className="work-card__img" src={p.images[0]} alt={`${p.name}, ${p.location}`} loading="lazy" />
+                </CardSticky>
+              ))}
+            </ContainerScroll>
           </div>
-          <ContainerScroll className="work__cards">
-            {projects.slice(0, 4).map((p, i) => (
-              <CardSticky key={p.slug} index={i} incrementY={64} incrementZ={5} className="work-card">
-                <Link to={`/projects/${p.slug}`} className="work-card__head">
-                  <h3>{p.name}</h3>
-                  <div className="work-card__chips">
-                    {[p.type, p.location, p.year, p.description].filter(Boolean).map((c) => <span key={c}>{c}</span>)}
-                  </div>
-                </Link>
-                <img className="work-card__img" src={p.images[0]} alt={`${p.name}, ${p.location}`} loading="lazy" />
-              </CardSticky>
-            ))}
-          </ContainerScroll>
-        </div>
-      </section>
+        </section>
+      )}
 
       <section className="section section--process">
         <div className="container">
